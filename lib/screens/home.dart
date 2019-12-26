@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-
-class Chat extends StatefulWidget {
-  Chat({Key key}) : super(key: key);
+import 'package:extended_text_field/extended_text_field.dart';
+class Home extends StatefulWidget {
+  Home({Key key}) : super(key: key);
 
   @override
-  _ChatState createState() => _ChatState();
+  _HomeState createState() => _HomeState();
 }
 
-class _ChatState extends State<Chat> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat'),
+       appBar: AppBar(
+        title: Text('Home'),
         actions: <Widget>[
            Material(
              color: Colors.red,
              child: MaterialButton(
-               onPressed: (){ 
+              onPressed: (){ 
                  Navigator.pop(context);
               return showDialog(
               context: context,
@@ -187,22 +187,8 @@ class _ChatState extends State<Chat> {
           )
         )
       ),
-       body: ListView(
-         children: <Widget>[
-           Container(
-             child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.search),
-                  hintText: 'Search friends...',
-                  suffixIcon: IconButton(
-                    onPressed: ()=> print('debug'),
-                    icon: Icon(Icons.arrow_forward),
-                  )
-                ),               
-             ),
-           )
-           
-         ],
+       body: Center(
+         child: Text('Empty'),
        )
     );
   }

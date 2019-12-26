@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Chat extends StatefulWidget {
-  Chat({Key key}) : super(key: key);
+class Events extends StatefulWidget {
+  Events({Key key}) : super(key: key);
 
   @override
-  _ChatState createState() => _ChatState();
+  _EventsState createState() => _EventsState();
 }
 
-class _ChatState extends State<Chat> {
+class _EventsState extends State<Events> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat'),
+       appBar: AppBar(
+        title: Text('Event and News'),
         actions: <Widget>[
            Material(
              color: Colors.red,
@@ -187,22 +187,51 @@ class _ChatState extends State<Chat> {
           )
         )
       ),
-       body: ListView(
-         children: <Widget>[
-           Container(
-             child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.search),
-                  hintText: 'Search friends...',
-                  suffixIcon: IconButton(
-                    onPressed: ()=> print('debug'),
-                    icon: Icon(Icons.arrow_forward),
-                  )
-                ),               
+       body: SafeArea(
+         child: ListView(
+           children: <Widget>[
+             SizedBox(height: 7,),
+             Image(
+               image: AssetImage('Assets/01.png'),
+               height: 200,
+               width: 200,
              ),
-           )
-           
-         ],
+             SizedBox(height: 10,),
+             Image(
+               image: AssetImage('Assets/02.png'),
+               height: 200,
+               width: 200,
+             ),
+             SizedBox(height: 10,),
+
+             Image(
+               image: AssetImage('Assets/03.png'),
+               height: 200,
+               width: 200,
+               
+             ),
+             SizedBox(height: 10,),
+
+             Image(
+               image: AssetImage('Assets/04.png'),
+               height: 200,
+               width: 200,
+             ),
+             SizedBox(height: 10,),
+             Image(
+               image: AssetImage('Assets/05.png'),
+               height: 200,
+               width: 200,
+             ),
+             SizedBox(height: 10,),
+             Image(
+               image: AssetImage('Assets/06.png'),
+               height: 200,
+               width: 200,
+             ),
+             SizedBox(height: 10,),
+           ],
+         ),
        )
     );
   }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Chat extends StatefulWidget {
-  Chat({Key key}) : super(key: key);
+class Settings extends StatefulWidget {
+  Settings({Key key}) : super(key: key);
 
   @override
-  _ChatState createState() => _ChatState();
+  _SettingsState createState() => _SettingsState();
 }
 
-class _ChatState extends State<Chat> {
+class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat'),
+        title: Text('Settings'),
         actions: <Widget>[
            Material(
              color: Colors.red,
@@ -187,22 +187,8 @@ class _ChatState extends State<Chat> {
           )
         )
       ),
-       body: ListView(
-         children: <Widget>[
-           Container(
-             child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.search),
-                  hintText: 'Search friends...',
-                  suffixIcon: IconButton(
-                    onPressed: ()=> print('debug'),
-                    icon: Icon(Icons.arrow_forward),
-                  )
-                ),               
-             ),
-           )
-           
-         ],
+       body: Center(
+         child: Text('To be Added',style:  TextStyle(fontStyle: FontStyle.italic),),
        )
     );
   }
