@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:wisdon_world/whole.dart';
+import '../login.dart';
 class Settings extends StatefulWidget {
   Settings({Key key}) : super(key: key);
 
@@ -188,7 +189,10 @@ class _SettingsState extends State<Settings> {
         )
       ),
        body: Center(
-         child: Text('To be Added',style:  TextStyle(fontStyle: FontStyle.italic),),
+         child: RaisedButton(
+           child: Text('click'),
+           onPressed: ()=> print(Whole.name),
+         )
        )
     );
   }
