@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'whole.dart';
 import 'register.dart';
 import 'dashboard.dart';
 class Page extends StatefulWidget {
@@ -11,6 +11,8 @@ class Page extends StatefulWidget {
 
 class _PageState extends State<Page> {
   @override
+  final myKey = GlobalKey<FormState>();
+  String n , p;
   final emailC = TextEditingController();
   final passC = TextEditingController();
   void show(){
@@ -35,10 +37,14 @@ class _PageState extends State<Page> {
     final text = Text('hello');
     final email = TextFormField(
       controller: emailC,
+      validator: (input)=> !input.contains('@') ? 'Not valid ': null,
+      onSaved: (input)=> n = input,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
-        hintText: 'Email',
+        labelText: 'Enter Email',
+        icon: Icon(Icons.email),
+        hintText: 'E.g YourEmail@domain.com',
         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32)
@@ -48,10 +54,13 @@ class _PageState extends State<Page> {
     final password = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
+      validator: (input)=> input.length < 9 ? 'wrong': null,
       controller: passC,
       obscureText: true,
       decoration: InputDecoration(
-        hintText: 'Password',
+        icon: Icon(Icons.vpn_key),
+        labelText: 'Enter Password',
+        hintText: 'E.g Password123',
         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32)
@@ -68,7 +77,10 @@ class _PageState extends State<Page> {
           minWidth: 120,
           height: 48,
           onPressed: (){
-            if(emailC.text == 'owais' && passC.text == '123'){
+            if(myKey.currentState.validate()){
+
+            }
+            if(emailC.text == 'test@wisdon.com' && passC.text == '123'){
               Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Dash()),
@@ -77,6 +89,7 @@ class _PageState extends State<Page> {
               return showDialog(
               context: context,
               builder: (context){
+                Whole.name = emailC.text;
                 return AlertDialog(
                  content: Row(children: <Widget>[
                    Icon(Icons.check_circle_outline, color: Colors.red, size: 49,),
@@ -176,33 +189,36 @@ class _PageState extends State<Page> {
       ),
        backgroundColor: Colors.white,
        body: Center(
-         child: ListView(
-             shrinkWrap: true,
-             padding: EdgeInsets.only(left: 24, right: 24),
-             children: <Widget>[
-               logo,
-               SizedBox(height: 25),
-               emailText,
-               SizedBox(height: 10),
-               email,
-               SizedBox(height: 15),
-               passText,
-               SizedBox(height: 15),
-               password,
-               SizedBox(height: 28),
-        //       LoginBtn,
-          
-               Row(children: <Widget>[
-                  SizedBox(width: 10),
-                 LoginBtn,
-                 SizedBox(width: 60),
-                 RegisterBtn
-               ],
-               ),
-              SizedBox(height: 28),  
-              forgetPass,     
+         child: Form(
+           key: myKey,
+                    child: ListView(
+               shrinkWrap: true,
+               padding: EdgeInsets.only(left: 24, right: 24),
+               children: <Widget>[
+                 logo,
+                 SizedBox(height: 25),
+      
+                 SizedBox(height: 10),
+                 email,
+                 SizedBox(height: 15),
 
-             ],
+                 SizedBox(height: 15),
+                 password,
+                 SizedBox(height: 28),
+        //       LoginBtn,
+            
+                 Row(children: <Widget>[
+                    SizedBox(width: 10),
+                   LoginBtn,
+                   SizedBox(width: 60),
+                   RegisterBtn
+                 ],
+                 ),
+                SizedBox(height: 28),  
+                forgetPass,     
+
+               ],
+           ),
          ),
          ),
     );

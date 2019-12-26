@@ -6,9 +6,11 @@ class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
 }
-
+var ShowPass = true;
+double l = 50;
 class _RegisterState extends State<Register> {
   @override
+  final mykey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     final logo = Hero(
        tag: 'hero',
@@ -23,11 +25,14 @@ class _RegisterState extends State<Register> {
     );
     final fnameC = TextEditingController();
     final rFName = TextFormField(
+      validator: (input)=> input.isEmpty ? "This field can't be empty": null,
       controller: fnameC,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
         hintText: 'UserName',
+        labelText: 'UserName',
+        suffixIcon: Icon(Icons.people),
         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32)
@@ -38,10 +43,22 @@ class _RegisterState extends State<Register> {
     final mailC = TextEditingController();
     final rLName = TextFormField(
       controller: mailC,
+      validator: (input){
+        if(input.isEmpty){
+          return "This field can't be empty";
+        }
+        else if(!input.contains('@') && !input.contains('.com')){
+          return "Enter valid Email";
+        }
+        else
+        return null;
+      },
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
         hintText: 'Email Address',
+        labelText: 'Email Address',
+        suffixIcon: Icon(Icons.email),
         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32)
@@ -50,11 +67,14 @@ class _RegisterState extends State<Register> {
     );
     final phoneC = TextEditingController();
      final phone = TextFormField(
+      validator: (input)=> input.isEmpty ? "This field can't be empty": null,
       controller: phoneC,
       keyboardType: TextInputType.number,
       autofocus: false,
       decoration: InputDecoration(
+        labelText: 'Phone number',
         hintText: 'Phone Number',
+        suffixIcon: Icon(Icons.phone),
         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32)
@@ -63,11 +83,27 @@ class _RegisterState extends State<Register> {
     ); 
     final passC = TextEditingController();
      final pass = TextFormField(
+       validator: (input){
+        if(input.isEmpty){
+          return "This field can't be empty";
+        }
+        else if(input.length < 6){
+          return "Atleast 6 characters";
+        }
+        else
+        return null;
+      }, 
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       controller: passC,
-      obscureText: true,
+      obscureText: ShowPass,
       decoration: InputDecoration(
+        labelText: 'Password',
+        suffixIcon: IconButton(
+                    onPressed: ()=> ShowPass = !ShowPass,
+                    icon: Icon(Icons.vpn_key),
+                  ),
+
         hintText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         border: OutlineInputBorder(
@@ -87,7 +123,8 @@ class _RegisterState extends State<Register> {
           minWidth: 120,
           height: 48,
           onPressed: (){
-           if(fnameC.text != '' && mailC.text != '' && phoneC.text != '' && passC.text != ''){
+            if(mykey.currentState.validate()){
+                if(fnameC.text != '' && mailC.text != '' && phoneC.text != '' && passC.text != ''){
              print(fnameC.text);
              if(mailC.text.contains('@') && mailC.text.contains('.com') && mailC.text.length != 5){
                return showDialog(
@@ -128,6 +165,8 @@ class _RegisterState extends State<Register> {
             );
              }
            }
+            }
+           
            else {
              return showDialog(
               context: context,
@@ -161,62 +200,32 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.red,
       ),
       body: Center(
-        child: ListView(
-          children: <Widget>[
-            SizedBox(height: 10,),
-            logo,
-            SizedBox(height: 13,),
-            Container(
-              margin: EdgeInsets.only(left: 18,bottom: 6),
-              child: Text('UserName',
-              style:  TextStyle(
-                fontSize: 18,
-              ),
-              ),
-            ),
-            SizedBox(height: 6,),
-            rFName,
-            SizedBox(height: 10,),
-            Container(
-              margin: EdgeInsets.only(left: 18,bottom: 6),
-              child: Text('Email',
-              style:  TextStyle(
-                fontSize: 18,
-              ),
-              ),
-            ),
-           
-            SizedBox(height: 6,),
-            rLName,
-            SizedBox(height: 10,),
-             Container(
-              margin: EdgeInsets.only(left: 18,bottom: 6),
-              child: Text('Phone Number',
-              style:  TextStyle(
-                fontSize: 18,
-              ),
-              ),
-            ),
-            SizedBox(height: 6,),
-            phone,
-            SizedBox(height: 10,),
-            Container(
-              margin: EdgeInsets.only(left: 18,bottom: 6),
-              child: Text('Password',
-              style:  TextStyle(
-                fontSize: 18,
-              ),
-              ),
-            ),
-            SizedBox(height: 6,),
-            pass,
-            SizedBox(height: 15,),
-            Column(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Form(
+                    key: mykey,
+                    child: ListView(
               children: <Widget>[
-                SignUp,
+                SizedBox(height: 40,),
+                logo,
+                SizedBox(height: 30,),
+                
+                rFName,
+                SizedBox(height: l,),
+                rLName,
+                SizedBox(height: l,),
+                phone,          
+                SizedBox(height: l,),
+                pass,
+                SizedBox(height: 35,),
+                Column(
+                  children: <Widget>[
+                    SignUp,
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
       
