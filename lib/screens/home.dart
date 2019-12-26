@@ -187,8 +187,43 @@ class _HomeState extends State<Home> {
           )
         )
       ),
-       body: Center(
-         child: Text('Empty'),
+       body: ListView(
+         children: <Widget>[
+           SizedBox(height: 7,),
+           Padding(
+             padding: const EdgeInsets.only(left: 20,right: 20),
+             child: TextField(
+               maxLines: 10,
+               minLines: 1,
+               decoration: InputDecoration(
+                labelText: 'Post',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2)
+                ),
+                 icon: CircleAvatar(
+                    backgroundImage: NetworkImage('https://a.wattpad.com/useravatar/Premium_lizaqake.256.52630.jpg'),
+                    radius: 25,
+                 ),
+               ),
+             ),
+           ),
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+             crossAxisAlignment: CrossAxisAlignment.end,
+             children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.send),
+                ),
+                IconButton(
+                  icon: Icon(Icons.picture_as_pdf),
+                ),
+                
+             ],
+           ),
+           SizedBox(height: 6,),
+           Divider(),
+           TextField()
+         ],
        )
     );
   }
