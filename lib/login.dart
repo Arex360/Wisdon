@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'register.dart';
+import 'dashboard.dart';
 class Page extends StatefulWidget {
   Page({Key key}) : super(key: key);
   static String tag = 'login-page';
@@ -68,6 +69,11 @@ class _PageState extends State<Page> {
           height: 48,
           onPressed: (){
             if(emailC.text == 'owais' && passC.text == '123'){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Dash()),
+              );
+              
               return showDialog(
               context: context,
               builder: (context){
@@ -84,7 +90,7 @@ class _PageState extends State<Page> {
                  elevation: 20,
                 );
               }
-            );
+            );  
             }
             else{
               return showDialog(
@@ -165,7 +171,7 @@ class _PageState extends State<Page> {
         backgroundColor: Colors.red,
         child: Text('Help'),
         onPressed: (){
-          print('hello');
+          print(emailC.text);
         },
       ),
        backgroundColor: Colors.white,
