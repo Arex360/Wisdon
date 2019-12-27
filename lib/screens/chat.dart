@@ -193,13 +193,17 @@ class _ChatState extends State<Chat> {
              child: TextField(
                 decoration: InputDecoration(
                   icon: Icon(Icons.search),
-                  hintText: 'Search friends...',
+                  labelText: 'Search friends...',
                   suffixIcon: IconButton(
                     onPressed: ()=> print('debug'),
                     icon: Icon(Icons.arrow_forward),
                   )
                 ),               
              ),
+           ),
+           SizedBox(height: 10,),
+           Divider(
+             thickness: 3,
            )
            
          ],

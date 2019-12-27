@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wisdon_world/whole.dart';
+import 'package:wisdon/whole.dart';
 import '../login.dart';
 class Settings extends StatefulWidget {
   Settings({Key key}) : super(key: key);
