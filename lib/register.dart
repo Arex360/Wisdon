@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'whole.dart';
+import 'package:easy_dialogs/easy_dialogs.dart';
 class Register extends StatefulWidget {
   Register({Key key}) : super(key: key);
 
@@ -7,9 +9,17 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 var ShowPass = true;
-double l = 50;
+double l = 10;
 class _RegisterState extends State<Register> {
+  DateTime date;
   @override
+  List<String> gender = ["Male","Female"];
+  String cGender = 'none';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   final mykey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -211,13 +221,100 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 30,),
                 
                 rFName,
-                SizedBox(height: l,),
+                SizedBox(height: 20,),
                 rLName,
-                SizedBox(height: l,),
+                SizedBox(height: 20,),
                 phone,          
-                SizedBox(height: l,),
+                SizedBox(height: 20,),
                 pass,
-                SizedBox(height: 35,),
+                SizedBox(height: 20,),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Material(
+                        elevation: 10,
+                        color: Colors.red,
+                        child: MaterialButton(
+                          onPressed: (){
+                            showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1970),
+                              lastDate: DateTime(2020),
+                            ).then((d){
+                               setState(() {
+                                 date = d;
+                               });
+                            });
+                            Whole.obDate = date.toString();
+                            Whole.day = Whole.obDate.substring(8,10);
+                            Whole.month = Whole.obDate.substring(5,7);
+                            Whole.year = Whole.obDate.substring(0,4);
+                            print("Day: "+ Whole.day);
+                            print("Month: "+ Whole.month);
+                            print("Year: "+ Whole.year);
+
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Text('Date of Birth',style: TextStyle(color: Colors.white),),
+                              SizedBox(width: 6,),
+                              Icon(Icons.date_range,color: Colors.white,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      Material(
+                        color: Colors.red,
+                        elevation: 10,
+                        child: MaterialButton(
+                          onPressed: (){
+                            print(cGender);
+                            return showDialog(
+                              context: context,
+                              builder: (context){
+                                return SingleChoiceConfirmationDialog(
+                                  
+                              title: Row(
+                                children: <Widget>[
+                                  Icon(Icons.person_pin, color: Colors.red,size: 50,),
+                                  SizedBox(width: 8,),
+                                  Text('Select Gender',style: TextStyle(color: Colors.red,fontSize: 20, fontWeight: FontWeight.bold),)
+                                ],
+                              ),
+                              initialValue: cGender,
+                              items: gender,
+                              activeColor: Colors.red,
+                              onSelected: (str){
+                                setState(() {
+                                  cGender = str;
+                                });
+                              },
+                              actionButtonLabelColor: Colors.red,
+                              divider: Container(
+                                height: 1,
+                                color: Colors.red
+                              ),
+                              
+
+                            );
+                              }
+                            );
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Text('Gender',style: TextStyle(color: Colors.white),),
+                              SizedBox(width: 6,),
+                              Icon(Icons.people,color: Colors.white,)
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 25,),
                 Column(
                   children: <Widget>[
                     SignUp,
