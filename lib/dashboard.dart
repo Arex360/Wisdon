@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wisdon_world/screens/profile.dart';
+import 'package:wisdon/screens/profile.dart';
 import 'login.dart';
-import 'package:wisdon_world/screens/chat.dart';
-import 'package:wisdon_world/screens/events.dart';
-import 'package:wisdon_world/screens/home.dart';
-import 'package:wisdon_world/screens/setting.dart';
+import 'package:wisdon/screens/chat.dart';
+import 'package:wisdon/screens/events.dart';
+import 'package:wisdon/screens/home.dart';
+import 'package:wisdon/screens/setting.dart';
 class Dash extends StatefulWidget {
   Dash({Key key}) : super(key: key);
 
